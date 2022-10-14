@@ -8,6 +8,9 @@ function reset() {
     pointer = 0;
     pc = 0;
     data = [0];
+    document.getElementById("datacontainer").innerHTML = `
+    <div class="box" id="0">0</div>
+    `;
 }
 //
 function sleep(ms) {
@@ -50,21 +53,28 @@ function updateScreen() {
 }
 
 // get bracket pairs
-let stack = [];
-let pairs = {};
-for (var i=0; i < program.length; i++) {
-    let token = program[i];
-    if (token == "[") {
-        stack.push(i);
-    } else if (token == "]") {
-        var index = stack.pop();
-        pairs[i] = index;
-        pairs[index] = i;
+function getBracketPairs(program) {
+    let stack = [];
+    let pairs = {};
+    for (var i=0; i < program.length; i++) {
+        let token = program[i];
+        if (token == "[") {
+            stack.push(i);
+        } else if (token == "]") {
+            var index = stack.pop();
+            pairs[i] = index;
+            pairs[index] = i;
+        }
     }
+    return pairs
 }
 
 async function interpret(program) {
+  reset();
+    
+  // Setup  
   program.replace(/\s/g, '');
+  let pairs = getBracketPairs(program);
   let wait_element = document.getElementById("speed");
   let speed = wait_element.options[wait_element.selectedIndex].text;
   console.log(speed);
@@ -78,6 +88,8 @@ async function interpret(program) {
       speed = 200;
   }
   document.getElementById("program").innerHTML = program;
+
+  // Interpreter
   while (pc < program.length) {
     let token = program[pc];
     if (token == "+") {
@@ -94,6 +106,7 @@ async function interpret(program) {
       }
     } else if (token == "]") { 
       pc = pairs[pc]-1;
+      console.log("moving to: " + pairs[pc]-1);
     } else if (token == ".") {
       document.getElementById("output")
         .innerHTML +=  String.fromCharCode(data[pointer]); //`${data[pointer]} `;
