@@ -12,7 +12,7 @@
 
 
 <p align="center">
-  <img width="80%" src="https://cdn.discordapp.com/attachments/947092663914623016/1030519477042937896/unknown.png">
+  <img width="80%" src="https://cdn.discordapp.com/attachments/947092663914623016/1030522360517894144/bfvis.png">
 </p>
 
 ## Try it out!
