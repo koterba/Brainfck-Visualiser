@@ -4,10 +4,10 @@ let pc = 0;
 let data = [0];
 
 function reset() {
-    let itemid = 0;
-    let pointer = 0;
-    let pc = 0;
-    let data = [0];
+    itemid = 0;
+    pointer = 0;
+    pc = 0;
+    data = [0];
 }
 //
 function sleep(ms) {
