@@ -17,7 +17,7 @@ function sleep(ms) {
 }
 
 // false = decrement by 1, true = increment by 1
-function movePointer(inc) {
+function movePointer(inc, toUpdate) {
     if (!inc) {
         pointer--;
     } else {
@@ -28,17 +28,17 @@ function movePointer(inc) {
     }
     
     }
-    updateScreen();
+    if (toUpdate) updateScreen();
 }
 
 // false = decrement by 1, true = increment by 1
-function incAtPointer(inc) {
+function incAtPointer(inc, toUpdate) {
     if (inc) {
         data[pointer]++;
     } else {
         data[pointer]--;
     }
-    updateScreen();
+    if (toUpdate) updateScreen();
 }
 
 
@@ -76,10 +76,11 @@ async function interpret(program) {
   let pairs = getBracketPairs(program);
   let wait_element = document.getElementById("speed");
   let speed = wait_element.options[wait_element.selectedIndex].text;
-  console.log(speed);
   if (speed == "Instant") {
       speed = 0;
-  } else if (speed == "Fast") {
+  } else if (speed == "Fastest") {
+      speed = 1;
+  } else if (speed == "Medium") {
       speed = 100;
   } else if (speed == "Slow") {
       speed = 500;
@@ -92,20 +93,19 @@ async function interpret(program) {
   while (pc < program.length) {
     let token = program[pc];
     if (token == "+") {
-      incAtPointer(true);
+      incAtPointer(true, speed);
     } else if (token == "-") {
-      incAtPointer(false);
+      incAtPointer(false, speed);
     } else if (token == ">") {
-      movePointer(true);
+      movePointer(true, speed);
     } else if (token == "<") {
-      movePointer(false)
+      movePointer(false, speed)
     } else if (token == "[") {
       if (!data[pointer]) {
         pc = pairs[pc];
       }
     } else if (token == "]") { 
       pc = pairs[pc]-1;
-      console.log("moving to: " + pairs[pc]-1);
     } else if (token == ".") {
       let char = String.fromCharCode(data[pointer]);
       // make terminal-working output work with html
@@ -117,9 +117,12 @@ async function interpret(program) {
       document.getElementById("output").innerHTML += char;
     }
     pc++;
-    document.getElementById("program").innerHTML = program + "<br>" + "&nbsp;".repeat(pc-1) + "^";
-    await sleep(speed);
+    if (speed) {
+        document.getElementById("program").innerHTML = program + "<br>" + "&nbsp;".repeat(pc-1) + "^";
+        await sleep(speed);
+    }
   }
+  updateScreen();
 }
 
 /// Only enable if running manually
