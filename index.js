@@ -107,8 +107,14 @@ async function interpret(program) {
       pc = pairs[pc]-1;
       console.log("moving to: " + pairs[pc]-1);
     } else if (token == ".") {
-      document.getElementById("output")
-        .innerHTML +=  String.fromCharCode(data[pointer]); //`${data[pointer]} `;
+      let char = String.fromCharCode(data[pointer]);
+      // make terminal-working output work with html
+      if (char == "\n") {
+        char = "<br>";
+      } else if (char == " ") {
+        char = "&nbsp;";
+      }
+      document.getElementById("output").innerHTML += char;
     }
     pc++;
     document.getElementById("program").innerHTML = program + "<br>" + "&nbsp;".repeat(pc-1) + "^";
