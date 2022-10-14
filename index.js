@@ -115,6 +115,15 @@ async function interpret(program) {
         char = "&nbsp;";
       }
       document.getElementById("output").innerHTML += char;
+    } else if (token == ",") {
+        let input = prompt("Program is asking for 1 byte (character) of input");
+        console.log(input);
+        if (input == null || input == "") {
+          input = 0;
+        } else {
+          input = input.charCodeAt(0);
+        }
+        data[pointer] = input;
     }
     pc++;
     if (speed) {
