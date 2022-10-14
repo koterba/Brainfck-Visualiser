@@ -8,9 +8,8 @@ function reset() {
     pointer = 0;
     pc = 0;
     data = [0];
-    document.getElementById("datacontainer").innerHTML = `
-    <div class="box" id="0">0</div>
-    `;
+    document.getElementById("datacontainer").innerHTML = `<div class="box" id="0">0</div>`;
+    document.getElementById("output").innerHTML = "";
 }
 //
 function sleep(ms) {
