@@ -10,9 +10,9 @@
     <h1>Brainf*ck Visualiser</h1>
     <div class="inputs">
         <input class="rounded" id="program-entry" placeholder="Enter program">
-        <button class="execute" onclick="reset(); interpret(document.getElementById('program-entry').value);">Run</button>
+        <button class="execute" onclick="interpret(document.getElementById('program-entry').value);">Run</button>
         <select name="speed" id="speed">
-          <option value="volvo">Select speed</option>
+          <option value="SelectSpeed">Select speed</option>
           <option value="slow">Slow</option>
           <option value="fast">Fast</option>
           <option value="instant">Instant</option>
@@ -25,7 +25,7 @@
     </div>
     <h2 class="liner">Memory</h2>
     <div class="datacontainer" id="datacontainer">
-        <div class="box gradient-border" id="0">0</div>
+        <div class="box" id="0">0</div>
     </div>
     <h2 class="liner">Output</h2>
     <div class="output" id="output">
