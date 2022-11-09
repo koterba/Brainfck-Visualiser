@@ -1,7 +1,7 @@
 <p align="center">
   <h3 align="center">A Brainf*ck Visualiser</h3>
 </p>
- 
+
 ---
 
 <p align="center">
