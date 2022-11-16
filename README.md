@@ -5,11 +5,11 @@
 ---
 
 <p align="center">
-  <p align="center">An intuitive and interactive way of playing around with the brainf*ck language.</p>
+  <p align="center">An intuitive and interactive way of playing around with the [brainf*ck](https://en.wikipedia.org/wiki/Brainfuck) language.</p>
 </p>
 
 ---
-
+ 
 
 <p align="center">
   <img width="80%" src="https://cdn.discordapp.com/attachments/947092663914623016/1030522360517894144/bfvis.png">
